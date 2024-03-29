@@ -5,12 +5,12 @@ export const Route = createRootRoute({
     component: () => (
         <>
             <div className="p-2 flex gap-2">
-                {/* <Link to="/" className="">
-                    Index
-                </Link>{' '}
-                <Link to="/manga" className="">
-                    Manga
-                </Link> */}
+                {/* code for future reference */}
+                {/* {
+                    <Link to="/" className="">
+                        Index
+                    </Link>
+                } */}
             </div>
             <Outlet />
             <TanStackRouterDevtools />
