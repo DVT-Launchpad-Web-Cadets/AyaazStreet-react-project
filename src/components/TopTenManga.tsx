@@ -11,7 +11,7 @@ function TopTenManga({ top }: { top: TopComics }) {
                 {topTen.map((manga) => (
                     <div
                         className="carousel-item carousel-center w-44"
-                        key={manga?.md_comics?.slug}
+                        key={`topManga-${manga?.slug}`}
                     >
                         <a>
                             <img
