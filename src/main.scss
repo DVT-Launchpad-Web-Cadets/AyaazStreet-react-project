@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-slate-950 text-neutral-50;
+    }
+}
+
+@layer components {
+    .menu :where(li > details > summary)::after {
+        @apply justify-self-start;
+    }
+
+    .text-gradient {
+        background: linear-gradient(77deg, hsla(231, 76%, 5%, 0.6), transparent 85%);
+    }
+
+    .image-gradient {
+        background: linear-gradient(0deg,hsla(231, 76%, 5%, 0) 0, hsla(231, 76%, 5%, 0.15) 15%, hsla(231, 76%, 5%, 0.35) 29%, hsla(231, 76%, 5%, 0.58) 44%, #030616 68%, #030616);
+    }
+}
