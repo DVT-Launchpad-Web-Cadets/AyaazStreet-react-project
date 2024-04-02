@@ -1,7 +1,9 @@
 import { TopComics } from '../models/TopManga'
 
 function TopTenManga({ top }: { top: TopComics }) {
-    const topTen = top?.recentRank.splice(0, 10)
+    const topTen = top?.recentRank
+        .filter((manga) => (manga.content_rating = 'safe'))
+        .splice(0, 10)
     return (
         <div id="new-manga">
             <h2 className="py-4 text-xl px-8">Top 10 Today</h2>

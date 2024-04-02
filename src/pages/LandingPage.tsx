@@ -10,7 +10,7 @@ function LandingPage() {
         queryFn: () => getGenres(),
     })
 
-    const { data: trending } = useQuery({
+    let { data: trending } = useQuery({
         queryKey: [`getTrending`],
         queryFn: () => getTrending(),
     })
@@ -28,7 +28,9 @@ function LandingPage() {
     let trendingItemNumber = 0
 
     if (trending) {
-        console.log({ trending })
+        trending = trending.filter(
+            (manga) => manga.md_comics?.content_rating === 'safe'
+        );
         trendingItemNumber = Math.round(
             0 - 0.5 + Math.random() * (trending?.length - 1 - 0 + 1)
         )
