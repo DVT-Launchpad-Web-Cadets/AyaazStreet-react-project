@@ -3,6 +3,7 @@ import { getGenres, getTop, getTrending, getUpdates } from '../api/categories'
 import NewManga from '../components/NewManga'
 import TopTenManga from '../components/TopTenManga'
 import TrendingManga from '../components/TrendingManga'
+import Navbar from '../components/Navbar'
 
 function LandingPage() {
     const { data: genres } = useQuery({
@@ -39,6 +40,7 @@ function LandingPage() {
     if (genres && trending && top && updates) {
         return (
             <div>
+                <Navbar />
                 <TrendingManga
                     trending={trending[trendingItemNumber]}
                     genres={genres}
