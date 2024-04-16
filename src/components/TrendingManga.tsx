@@ -18,7 +18,7 @@ function TrendingManga({
         >
             <figure>
                 <img
-                    className="object-cover object-top w-full"
+                    className="object-cover object-top  w-full"
                     src={`https://meo3.comick.pictures/${trending?.md_comics?.md_covers?.[0].b2key}`}
                     alt={trending?.md_comics?.title}
                 />
