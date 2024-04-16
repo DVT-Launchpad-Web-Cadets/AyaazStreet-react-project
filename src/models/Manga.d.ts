@@ -11,7 +11,7 @@ export interface Comic {
     identities?: Identities
     md_comics?: Comic
     uploaded_at?: string
-    year?: string
+    year?: number
     season?: string
     data?: Comic[]
     user_follow_count?: number

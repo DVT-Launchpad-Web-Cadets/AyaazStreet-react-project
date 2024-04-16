@@ -1,3 +1,4 @@
+
 import { ChapterDetails } from '../models/Chapter'
 import { Comic } from '../models/Manga'
 import { baseUrl } from './categories'
@@ -16,6 +17,8 @@ export async function getChapters(
     hid: string,
     page: number = 1
 ): Promise<ChapterDetails> {
-    const res = await fetch(`${baseUrl}comic/${hid}/chapters?page=${page}`)
+    const res = await fetch(
+        `${baseUrl}comic/${hid}/chapters?limit=10&page=${page}`
+    )
     return await res.json()
 }
