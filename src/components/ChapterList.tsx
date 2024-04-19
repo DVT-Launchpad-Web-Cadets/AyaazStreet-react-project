@@ -8,26 +8,28 @@ import ChapterListItem from './ChapterListItem'
 function ChapterList({ manga, page = 1 }: { manga: Comic; page?: number }) {
     const [currentPage, setCurrentPage] = useState(page)
 
-    const { data: chapters, isPreviousData } = useQuery({
+    const { data: chapters } = useQuery({
         queryKey: ['getChapters', manga?.comic?.hid, currentPage],
         queryFn: () => getChapters(manga?.comic?.hid ?? '', currentPage),
-        keepPreviousData: true,
+        
     })
-
-    console.log(chapters)
 
     if (!chapters?.chapters) {
         return (
-            <div className="flex flex-col items-center justify-center">
-                <div className="m-4">Chapters Not Found. Return Home</div>
-                <Link to="/" className="text-blue-600 underline">
-                    Home
-                </Link>
-            </div>
+            <>
+                <h2 className="text-xl font-bold my-4">Chapters</h2>
+                <div className="flex flex-col items-center justify-center">
+                    <div className="m-4">Chapters Not Found. Return Home</div>
+                    <Link to="/" className="text-blue-600 underline">
+                        Home
+                    </Link>
+                </div>
+            </>
         )
     }
     return (
         <>
+            <h2 className="text-xl font-bold mt-4">Chapters</h2>
             <div className="flex flex-col">
                 {chapters.chapters.map((chapter) =>
                     !chapter?.hid ? null : (
@@ -40,7 +42,6 @@ function ChapterList({ manga, page = 1 }: { manga: Comic; page?: number }) {
                     {currentPage !== 1 && (
                         <button
                             onClick={() =>
-                                !isPreviousData &&
                                 setCurrentPage(currentPage - 1)
                             }
                             className="join-item btn"
@@ -53,7 +54,7 @@ function ChapterList({ manga, page = 1 }: { manga: Comic; page?: number }) {
                     </button>
                     {currentPage * 10 < chapters.total! && (
                         <button
-                            disabled={isPreviousData}
+                            
                             onClick={() => setCurrentPage(currentPage + 1)}
                             className="join-item btn"
                         >

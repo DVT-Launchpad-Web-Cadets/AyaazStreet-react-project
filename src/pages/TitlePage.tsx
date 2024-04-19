@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import { getChapters, getMangaBySlug } from '../api/manga'
+import { getMangaBySlug } from '../api/manga'
 import ChapterList from '../components/ChapterList'
 import { Route } from '../routes/title.$manga.lazy'
 
@@ -13,21 +13,14 @@ function TitlePage() {
         queryFn: () => getMangaBySlug(manga),
     })
 
-    console.log(mangaDetails)
-
     const [showMoreDesc, setShowMoreDesc] = useState(false)
 
     if (
         !(
-            mangaDetails?.authors?.[0]?.name ||
-            mangaDetails?.comic?.follow_count ||
-            mangaDetails?.comic?.last_chapter ||
-            mangaDetails?.comic?.title ||
-            mangaDetails?.comic?.hid ||
-            mangaDetails?.comic?.md_comic_md_genres?.[0]?.md_genres?.name ||
-            mangaDetails?.comic?.md_covers?.[0]?.b2key ||
-            mangaDetails?.comic?.desc ||
-            mangaDetails?.comic?.user_follow_count
+            mangaDetails?.comic &&
+            mangaDetails?.comic?.slug &&
+            mangaDetails?.comic?.hid &&
+            mangaDetails?.comic?.md_covers?.[0]?.b2key
         )
     ) {
         return (
@@ -48,13 +41,21 @@ function TitlePage() {
                 <figure>
                     <img
                         className="object-cover object-top w-full"
-                        src={`https://meo3.comick.pictures/${mangaDetails?.comic?.md_covers?.[0].b2key}`}
+                        src={
+                            mangaDetails?.comic?.md_covers?.[0]?.b2key
+                                ? `https://meo3.comick.pictures/${mangaDetails.comic.md_covers?.[0].b2key}`
+                                : '/not-found-image.png'
+                        }
                         alt={mangaDetails?.comic?.title}
                     />
                 </figure>
                 <div className="card-body justify-start w-9/12 text-gradient p-0">
-                    <Link to="/">
-                        <button className="btn btn-circle m-4">
+                    <Link to="/" aria-label="Home">
+                        <button
+                            id="button-back"
+                            title="Back"
+                            className="btn btn-circle m-4"
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"
@@ -82,20 +83,34 @@ function TitlePage() {
                 </h1>
                 <p className="text-sm flex items-center">
                     {mangaDetails?.comic?.year}
-                    <img
-                        className="h-8 mx-2"
-                        src="https://flagsapi.com/JP/flat/64.png"
-                    ></img>
-                    {mangaDetails?.comic?.chapter_count} chapter
-                    {mangaDetails?.comic?.chapter_count > 1 && 's'}
+                    {mangaDetails?.comic?.country ? (
+                        <img
+                            className="h-8 mx-2"
+                            src={`https://flagsapi.com/${mangaDetails?.comic?.country?.toUpperCase()}/flat/64.png`}
+                            alt={mangaDetails?.comic?.country}
+                        />
+                    ) : (
+                        ''
+                    )}
+                    {mangaDetails?.comic?.chapter_count
+                        ? `${mangaDetails.comic.chapter_count} chapter${mangaDetails.comic.chapter_count > 1 ? 's' : ''}`
+                        : ''}
                 </p>
-                <button className="btn btn-primary my-4 w-full">
-                    Read Now
-                </button>
+                <Link
+                    to="/manga/$manga/$chapter"
+                    params={{
+                        manga: mangaDetails?.comic?.slug,
+                        chapter: '1',
+                    }}
+                >
+                    <button className="btn btn-primary my-4 w-full">
+                        Read Now
+                    </button>
+                </Link>
                 <p className="text-base">
                     {showMoreDesc
                         ? mangaDetails?.comic?.desc
-                        : `${mangaDetails?.comic?.desc?.substring(0, 100)}...`}
+                        : `${mangaDetails?.comic?.desc?.substring(0, Math.round(innerWidth / 4))}...`}
                     <button
                         className="ml-2 font-bold"
                         onClick={() => setShowMoreDesc(!showMoreDesc)}
@@ -104,7 +119,6 @@ function TitlePage() {
                     </button>
                 </p>
 
-                <h2 className="text-xl font-bold my-4">Chapters</h2>
                 <ChapterList manga={mangaDetails} />
             </main>
         </>
