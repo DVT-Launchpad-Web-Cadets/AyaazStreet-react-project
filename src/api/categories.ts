@@ -29,3 +29,10 @@ export async function getGenres(): Promise<Genre[]> {
     const res = await fetch(`${baseUrl}genre/`)
     return await res.json()
 }
+
+export async function getSearch(query: string): Promise<Comic[]> {
+    const res = await fetch(
+        `${baseUrl}v1.0/search/?type=comic&showall=true&q=${query}&t=true`
+    )
+    return await res.json()
+}

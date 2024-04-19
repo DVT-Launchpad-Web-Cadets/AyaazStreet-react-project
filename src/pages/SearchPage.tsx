@@ -1,12 +1,13 @@
-import Navbar from "../components/Navbar"
+import { useState } from "react";
+import Navbar from "../components/Navbar";
+import SearchResultsList from "../components/SearchResultsList";
 
 function SearchPage() {
+    const [searchResult, setSearchResult] = useState<string | undefined>()
     return (
         <>
-            <Navbar />
-            <main>
-                <h1>Search Page</h1>
-            </main>
+            <Navbar search={true} setSearchResult={setSearchResult}/>
+            <SearchResultsList searchResult={searchResult} />
         </>
     )
 }
