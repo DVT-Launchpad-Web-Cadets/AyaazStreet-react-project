@@ -29,7 +29,10 @@ function Navbar() {
             className={`navbar z-50 fixed ${showMenuBar ? 'bg-slate-950' : 'bg-gradient-to-b from-slate-950/50'} transition-all ease-in duration-200`}
         >
             <div className="navbar-start">
-                <Link to="/" className="btn btn-ghost text-xl text-neutral-50 pr-0">
+                <Link
+                    to="/"
+                    className="btn btn-ghost text-xl text-neutral-50 pr-0"
+                >
                     MangaVerse
                 </Link>
                 <div className="flex-none">
@@ -53,7 +56,11 @@ function Navbar() {
                 </div>
             </div>
             <div className="navbar-end">
-                <button className="btn btn-ghost btn-circle">
+                <button
+                    id="button-search"
+                    title="Search"
+                    className="btn btn-ghost btn-circle"
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5"

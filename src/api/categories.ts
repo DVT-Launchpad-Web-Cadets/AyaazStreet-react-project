@@ -2,7 +2,7 @@ import { Genre } from '../models/Genre'
 import { Comic } from '../models/Manga'
 import { TopComics } from '../models/TopManga'
 
-export const baseUrl = 'https://api.comick.io/'
+export const baseUrl = 'https://api.comick.fun/'
 
 export async function getTop(): Promise<TopComics> {
     const res = await fetch(

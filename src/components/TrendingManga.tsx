@@ -18,8 +18,12 @@ function TrendingManga({
         >
             <figure>
                 <img
-                    className="object-cover object-top w-full"
-                    src={`https://meo3.comick.pictures/${trending?.md_comics?.md_covers?.[0].b2key}`}
+                    className="object-cover object-top  w-full"
+                    src={
+                        trending?.md_comics?.md_covers?.[0]?.b2key
+                            ? `https://meo3.comick.pictures/${trending.md_comics.md_covers?.[0].b2key}`
+                            : '/not-found-image.png'
+                    }
                     alt={trending?.md_comics?.title}
                 />
             </figure>
@@ -44,32 +48,32 @@ function TrendingManga({
                 </p>
                 <div className="card-actions justify-start pl-8">
                     {trending?.md_comics?.slug && (
-                            <Link
-                                to="/manga/$manga/$chapter"
-                                params={{
-                                    manga: trending.md_comics.slug,
-                                    chapter: '1',
-                                }}
-                                className="min-w-full md:min-w-fit"
-                            >
-                                <button className="btn my-4 btn-primary">
-                                    Read Now
-                                </button>
-                            </Link>
-                        )}
+                        <Link
+                            to="/manga/$manga/$chapter"
+                            params={{
+                                manga: trending.md_comics.slug,
+                                chapter: '1',
+                            }}
+                            className="min-w-full md:min-w-fit"
+                        >
+                            <button className="btn my-4 btn-primary">
+                                Read Now
+                            </button>
+                        </Link>
+                    )}
                     {trending?.md_comics?.slug && (
-                            <Link
-                                to="/title/$manga"
-                                params={{
-                                    manga: trending.md_comics.slug,
-                                }}
-                                className="min-w-full md:min-w-fit"
-                            >
-                                <button className="btn my-4 btn-secondary">
-                                    More Info
-                                </button>
-                            </Link>
-                        )}
+                        <Link
+                            to="/title/$manga"
+                            params={{
+                                manga: trending.md_comics.slug,
+                            }}
+                            className="min-w-full md:min-w-fit"
+                        >
+                            <button className="btn my-4 btn-secondary">
+                                More Info
+                            </button>
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>
