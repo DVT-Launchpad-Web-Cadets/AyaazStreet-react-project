@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
+import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { getGenres } from '../api/categories'
-import { Link } from '@tanstack/react-router'
 
 function Navbar() {
     const [showMenuBar, setShowMenuBar] = useState(false)
@@ -56,26 +56,28 @@ function Navbar() {
                 </div>
             </div>
             <div className="navbar-end">
-                <button
-                    id="button-search"
-                    title="Search"
-                    className="btn btn-ghost btn-circle"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                <Link to="/search">
+                    <button
+                        id="button-search"
+                        title="Search"
+                        className="btn btn-ghost btn-circle"
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                    </svg>
-                </button>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                    </button>
+                </Link>
             </div>
         </div>
     )

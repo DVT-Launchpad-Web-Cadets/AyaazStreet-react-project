@@ -1,7 +1,13 @@
+import Navbar from "../components/Navbar";
+
 function MangaPage() {
     return (
         <>
-            <h1>Hello Manga!</h1>
+            <Navbar />
+            <main className="flex justify-center items-center w-screen h-screen">
+                <h1>Reading coming soon...</h1>
+            </main>
+            
         </>
     )
 }
