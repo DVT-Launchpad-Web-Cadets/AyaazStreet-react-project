@@ -24,12 +24,12 @@ function TitlePage() {
         )
     ) {
         return (
-            <div className="flex flex-col items-center justify-center">
+            <main className="flex justify-center items-center w-screen h-screen">
                 <div className="m-4">Manga Not Found. Return Home</div>
                 <Link to="/" className="text-blue-600 underline">
                     Home
                 </Link>
-            </div>
+            </main>
         )
     }
     return (

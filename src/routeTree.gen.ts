@@ -18,6 +18,7 @@ import { Route as IndexImport } from './routes/index'
 // Create Virtual Routes
 
 const TitleLazyImport = createFileRoute('/title')()
+const SearchLazyImport = createFileRoute('/search')()
 const MangaLazyImport = createFileRoute('/manga')()
 const TitleMangaLazyImport = createFileRoute('/title/$manga')()
 const MangaMangaLazyImport = createFileRoute('/manga/$manga')()
@@ -29,6 +30,11 @@ const TitleLazyRoute = TitleLazyImport.update({
   path: '/title',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/title.lazy').then((d) => d.Route))
+
+const SearchLazyRoute = SearchLazyImport.update({
+  path: '/search',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
 
 const MangaLazyRoute = MangaLazyImport.update({
   path: '/manga',
@@ -69,6 +75,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MangaLazyImport
       parentRoute: typeof rootRoute
     }
+    '/search': {
+      preLoaderRoute: typeof SearchLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/title': {
       preLoaderRoute: typeof TitleLazyImport
       parentRoute: typeof rootRoute
@@ -95,6 +105,7 @@ export const routeTree = rootRoute.addChildren([
   MangaLazyRoute.addChildren([
     MangaMangaLazyRoute.addChildren([MangaMangaChapterLazyRoute]),
   ]),
+  SearchLazyRoute,
   TitleLazyRoute.addChildren([TitleMangaLazyRoute]),
 ])
 
