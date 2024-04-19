@@ -32,7 +32,7 @@ export async function getGenres(): Promise<Genre[]> {
 
 export async function getSearch(query: string): Promise<Comic[]> {
     const res = await fetch(
-        `${baseUrl}v1.0/search/?type=comic&showall=true&q=${query}&t=true`
+        `${baseUrl}v1.0/search/?type=comic&showall=true&q=${encodeURIComponent(query)}&t=true`
     )
     return await res.json()
 }

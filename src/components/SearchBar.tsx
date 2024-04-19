@@ -1,11 +1,11 @@
 import { Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import { useSearchStore } from '../store/searchStore'
 
-function SearchBar({
-    setSearchResult,
-}: {
-    setSearchResult: React.Dispatch<React.SetStateAction<string | undefined>>
-}) {
+function SearchBar() {
+    const searchQuery = useSearchStore((state) => state.searchQuery)
+    const setSearchQuery = useSearchStore((state) => state.setSearchQuery)
+
     const SearchSchema = Yup.object().shape({
         search: Yup.string()
             .min(1, 'Too Short!')
@@ -16,10 +16,10 @@ function SearchBar({
         <>
             <Formik
                 initialValues={{
-                    search: '',
+                    search: searchQuery,
                 }}
                 onSubmit={async (values) => {
-                    setSearchResult(values.search)
+                    setSearchQuery(values.search)
                 }}
                 validationSchema={SearchSchema}
             >

@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { getSearch } from '../api/categories'
 import SearchResultsItem from './SearchResultsItem'
+import { useSearchStore } from '../store/searchStore'
 
-function SearchResultsList({
-    searchResult = '',
-}: {
-    searchResult: string | undefined
-}) {
+function SearchResultsList() {
+    const searchQuery = useSearchStore((state) => state.searchQuery)
     const { data: searchedManga } = useQuery({
-        queryKey: [`getSearch`, searchResult],
-        queryFn: () => getSearch(searchResult),
+        queryKey: [`getSearch`, searchQuery],
+        queryFn: () => getSearch(searchQuery),
     })
     searchedManga?.filter(
         (manga) => manga?.md_comics?.content_rating === 'safe'

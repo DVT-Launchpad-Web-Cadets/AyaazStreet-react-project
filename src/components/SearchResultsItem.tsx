@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router'
 
 function SearchResultsItem({manga}: {manga: Comic}) {
     return (
-        <div className="rounded w-44">
+        <div className="w-44">
             <Link
                 to="/title/$manga"
                 params={{

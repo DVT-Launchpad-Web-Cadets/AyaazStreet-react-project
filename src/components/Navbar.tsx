@@ -5,11 +5,9 @@ import { getGenres } from '../api/categories'
 import SearchBar from './SearchBar'
 
 function Navbar({
-    search = false,
-    setSearchResult,
+    showSearchOnNav = false,
 }: {
-    search?: boolean
-    setSearchResult?: React.Dispatch<React.SetStateAction<string | undefined>>
+    showSearchOnNav?: boolean
 }) {
     const [showMenuBar, setShowMenuBar] = useState(false)
 
@@ -63,8 +61,8 @@ function Navbar({
                 </div>
             </div>
             <div className="navbar-end">
-                {search ? (
-                    <SearchBar setSearchResult={setSearchResult!} />
+                {showSearchOnNav ? (
+                    <SearchBar />
                 ) : (
                     <Link to="/search">
                         <button
