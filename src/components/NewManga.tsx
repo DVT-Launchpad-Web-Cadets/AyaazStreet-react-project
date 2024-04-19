@@ -2,8 +2,6 @@ import { Link } from '@tanstack/react-router'
 import { Comic } from '../models/Manga'
 
 function NewManga({ updates }: { updates: Comic[] }) {
-    console.log(updates)
-    console.log(updates?.[0]?.md_comics?.md_covers?.[0]?.b2key)
     return (
         <div id="new-manga" className="ml-8 h-80 my-4">
             <h2 className="py-4 text-xl h-1/5">New Manga Chapters</h2>
